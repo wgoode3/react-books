@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Table from './Components/Table';
+import Form from './Components/Form';
+
 
 function App() {
+
+  const [books, setBooks] = useState([
+    {title: "War and Peace", author: "Leo Tolstoy"},
+    {title: "To Kill a Mockingbird", author: "Harper Lee"}
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container"> 
+      <div className="jumbotron">
+        <h1>Books</h1>
+      </div>
+      <div className="row">
+        <div className="col-4">
+          <Form addANewBook={ newBook => setBooks( [ newBook, ...books ] ) }/>
+        </div>
+        <div className="col-8">
+          <Table books={books} />
+        </div>
+      </div>
     </div>
   );
 }
